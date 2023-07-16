@@ -1,0 +1,10 @@
+[database]
+host = ""
+user = ""
+password = ""
+database = ""
+
+[server]
+port = 
+header = 
+format = ""
