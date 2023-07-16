@@ -1,36 +1,43 @@
 # run only 2 times for creation of database schema and creation/insertion of records in tables
 import mysql.connector
+import tomli
 
-db_name = "sms_database"
+with open("config.toml", "rb") as toml:
+    toml_dict = tomli.load(toml)
+    
+host=toml_dict["database"]["host"]
+user=toml_dict["database"]["user"]
+password=toml_dict["database"]["password"]
+database=toml_dict["database"]["database"]
 
 # create connection to the database
 # try will test if database schema exists
 try:
     my_db = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="Dragon4698",
-        database=db_name
+        host=host,
+        user=user,
+        password=password,
+        database=database
     )
 
 # except will handle the error and create a database schema
 except mysql.connector.errors.ProgrammingError:
     my_db = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="Dragon4698"
+        host=host,
+        user=user,
+        password=password
     )
 
     # create a cursor and initialize it
     my_cursor = my_db.cursor()
     # create database
-    my_cursor.execute(f"CREATE DATABASE {db_name}")
-    print(f"{db_name} has been created. Re-run the script to create and insert records in tables")
+    my_cursor.execute(f"CREATE DATABASE {database}")
+    print(f"{database} has been created. Re-run the script to create and insert records in tables")
     exit()
 
 # check to see if connection to MySQL was created
 print(f"[{my_db}] connection created")
-print(f"{db_name} exists")
+print(f"{database} exists")
 
 # create a cursor and initialize it
 my_cursor = my_db.cursor()

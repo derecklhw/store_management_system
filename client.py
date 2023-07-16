@@ -6,12 +6,16 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from PIL import ImageTk, Image
 from matplotlib import pyplot as plt
+import tomli
 
-HEADER = 64
-PORT = 5050
+with open("config.toml", "rb") as toml:
+    toml_dict = tomli.load(toml)
+
+HEADER = toml_dict["server"]["header"]
+PORT = toml_dict["server"]["port"]
 SERVER = socket.gethostbyname('localhost')
 ADDR = (SERVER, PORT)
-FORMAT = "utf-8"
+FORMAT = toml_dict["server"]["format"]
 DISCONNECT_MESSAGE = "!DISCONNECT"
 
 # create a client socket
@@ -77,7 +81,7 @@ class Log_In_Window(tk.Toplevel):
         self.resizable(False, False)
 
         # open and identifies the give image file
-        self.background_image = (Image.open("asset/login_background.png"))
+        self.background_image = (Image.open("asset/images/login_background.png"))
         # create a background image object
         self.new_background_image = ImageTk.PhotoImage(self.background_image)
 
@@ -208,7 +212,7 @@ class MainFrame(tk.Frame):
         log_off_button.pack(pady=20)
 
         # open and identifies the give image file
-        self.background_image = (Image.open("asset/main_background.png"))
+        self.background_image = (Image.open("asset/images/main_background.png"))
         # create a background image object
         self.new_background_image = ImageTk.PhotoImage(self.background_image)
         # configure the background image and place in background frame
@@ -575,7 +579,7 @@ class OrderClient(tk.Toplevel):
         self.resizable(False, False)
 
         # open and identifies the give image file
-        self.background_image = (Image.open("asset/main_background.png"))
+        self.background_image = (Image.open("asset/images/main_background.png"))
         # create a background image object
         self.new_background_image = ImageTk.PhotoImage(self.background_image)
         # configure the background image and place in background frame
@@ -796,7 +800,7 @@ class OrderReceipt(tk.Toplevel):
         self.resizable(False, False)
 
         # open and identifies the give image file
-        self.background_image = (Image.open("asset/main_background.png"))
+        self.background_image = (Image.open("asset/images/main_background.png"))
         # create a background image object
         self.new_background_image = ImageTk.PhotoImage(self.background_image)
         # configure the background image and place in background frame
