@@ -6,5 +6,5 @@ database = ""
 
 [server]
 port = 
-header = 
-format = ""
+header = 64
+format = "utf-8"
