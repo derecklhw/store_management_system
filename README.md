@@ -25,7 +25,7 @@ The Store Management Application is a GUI-based application built using `Tkinter
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/online-shopping-app.git
+   git clone https://github.com/derecklhw/tkinter_store_management_system.git
    ```
 
 2. Navigate to the project directory:
